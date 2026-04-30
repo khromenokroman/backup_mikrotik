@@ -1,14 +1,15 @@
+#include <fmt/format.h>
+
 #include <algorithm>
 #include <filesystem>
-#include <fmt/format.h>
 #include <fstream>
 #include <iostream>
 #include <ssh_client.hpp>
 
 class Backup {
-public:
-    explicit Backup(std::string_view host, int port, std::string_view user, std::string_view pass) :
-        m_client{host, port, user, pass}, m_device_name{get_name_device()} {}
+   public:
+    explicit Backup(std::string_view host, int port, std::string_view user, std::string_view pass)
+        : m_client{host, port, user, pass}, m_device_name{get_name_device()} {}
 
     void backup_text_config() {
         std::filesystem::path base{"backup"};
@@ -20,13 +21,12 @@ public:
         std::ofstream file(file_bk);
         if (!file.is_open()) {
             auto err = errno;
-            throw std::runtime_error(
-                    ::fmt::format("Не удалось открыть файл '{}' для записи: {}", file_bk.string(), strerror(err)));
+            throw std::runtime_error(::fmt::format("Не удалось открыть файл '{}' для записи: {}", file_bk.string(), strerror(err)));
         }
         file << back;
     }
 
-private:
+   private:
     std::string get_name_device() {
         auto a = m_client.execute("system/identity/print");
         std::ranges::remove(a, '\r');
@@ -45,7 +45,7 @@ private:
         return res;
     }
 
-    SshClient m_client; // 128
+    SshClient m_client;        // 128
     std::string m_device_name; // 32
 };
 
