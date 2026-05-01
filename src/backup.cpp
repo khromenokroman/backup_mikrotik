@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <filesystem>
 #include <fstream>
+
 Backup::Backup(std::string_view host, int port, std::string_view user, std::string_view pass)
     : m_client{host, port, user, pass}, m_device_name{get_name_device()} {}
 void Backup::backup_text_config() {

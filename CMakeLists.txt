@@ -19,12 +19,10 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(ssh_client)
 
 
-
 add_executable(mikrotik_backup
-        main.cpp
-        backup.cpp
+        src/main.cpp
+        src/backup.cpp
 )
-
 target_link_libraries(mikrotik_backup PRIVATE
         ssh-client-lib
         ${LIBSSH2_LIBRARIES}
