@@ -12,13 +12,11 @@ find_package(fmt REQUIRED)
 pkg_check_modules(LIBSSH2 REQUIRED libssh2)
 
 include(FetchContent)
-
 FetchContent_Declare(
         ssh_client
         GIT_REPOSITORY https://github.com/khromenokroman/ssh_client.git
         GIT_TAG master
 )
-
 FetchContent_MakeAvailable(ssh_client)
 
 
