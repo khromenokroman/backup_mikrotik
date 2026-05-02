@@ -28,3 +28,5 @@ target_link_libraries(mikrotik_backup PRIVATE
         ${LIBSSH2_LIBRARIES}
         fmt::fmt
 )
+
+add_subdirectory(install)
