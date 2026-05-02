@@ -1,5 +1,8 @@
-cmake_minimum_required(VERSION 3.25.1)
-project(mikrotik_backup)
+cmake_minimum_required(VERSION 3.18.4)
+project(mikrotik_backup
+        VERSION 0.0.1
+        LANGUAGES CXX
+        HOMEPAGE_URL "https://github.com/khromenokroman/backup_mikrotik")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -19,14 +22,15 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(ssh_client)
 
 
-add_executable(mikrotik_backup
+add_executable(${PROJECT_NAME}
         src/main.cpp
         src/backup.cpp
 )
-target_link_libraries(mikrotik_backup PRIVATE
+target_link_libraries(${PROJECT_NAME} PRIVATE
         ssh-client-lib
         ${LIBSSH2_LIBRARIES}
         fmt::fmt
 )
 
 add_subdirectory(install)
+add_subdirectory(deb)
